@@ -1,0 +1,58 @@
+.main {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  gap: 10rem;
+  align-items: center;
+  background-color: rgb(216, 212, 212);
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  box-shadow: -1px 5px 16px 0px rgba(0, 0, 0, 0.75);
+}
+.itemInfo {
+  display: flex;
+  padding-left: 4rem;
+  gap: 6rem;
+}
+.itemLine {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.main button {
+  width: 200px;
+}
+
+@media (max-width: 768px) {
+  .main {
+    height: auto;
+  }
+
+  .itemInfo {
+    flex-direction: column;
+
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .itemLine {
+    gap: 0.5rem;
+  }
+
+  .main button {
+    width: 100%; /* Mygtukas užima visą plotį mobilioje versijoje */
+  }
+}
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+  }
+  .itemLine {
+    gap: 0.3rem;
+  }
+}
