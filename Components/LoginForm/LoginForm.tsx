@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
-import { login } from "../../apiCalls/login";
+import { login } from "../../apiCalls/user";
 import cookie from "js-cookie";
 import { useRouter } from "next/router";
 import Button from "../Button/Button";

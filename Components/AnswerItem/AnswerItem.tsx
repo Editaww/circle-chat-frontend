@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 import Button from "../Button/Button";
-import cookie from "js-cookie";
-// import { useRouter } from "next/router";
-import axios from "axios";
+// import cookie from "js-cookie";
+// import axios from "axios";
 import Modal from "../Modal/Modal";
+import {
+  likeAnswerApi,
+  disLikeAnswerApi,
+  deleteAnswerApi,
+} from "../../apiCalls/answer";
 
 type AnswerProps = {
   id: string;
@@ -16,23 +20,18 @@ type AnswerProps = {
   gainedDisLikeNumber: number;
   questionId: string;
   onDelete: (answerId: string) => void;
-  // currentUserId?: string;
 };
 
 const AnswerItem = ({
   id,
   userName,
-  // userId,
   answerText,
   gainedLikeNumber,
   gainedDisLikeNumber,
   questionId,
   onDelete,
-}: // currentUserId,
-AnswerProps) => {
-  //   const router = useRouter();
-
-  const jwt = cookie.get(process.env.JWT_KEY as string);
+}: AnswerProps) => {
+  // const jwt = cookie.get(process.env.JWT_KEY as string);
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [answerToDelete, setAnswerToDelete] = useState<string | null>(null);
@@ -42,18 +41,8 @@ AnswerProps) => {
 
   const likeAnswer = async () => {
     try {
-      // const headers = {
-      //   authorization: jwt,
-      // };
-      const response = await axios.post(
-        `${process.env.SERVER_URL}/questions/${questionId}/answers/like`,
-        { answerId: id }
-        // { headers }
-      );
-
-      if (response.status === 200) {
-        setLikes((prev) => prev + 1);
-      }
+      const response = await likeAnswerApi(questionId, id);
+      if (response) setLikes((prev) => prev + 1);
     } catch (err) {
       console.log(err);
     }
@@ -61,39 +50,16 @@ AnswerProps) => {
 
   const disLikeAnswer = async () => {
     try {
-      // const headers = {
-      //   authorization: jwt,
-      // };
-      const response = await axios.post(
-        `${process.env.SERVER_URL}/questions/${questionId}/answers/dislike`,
-        { answerId: id }
-        // { headers }
-      );
-
-      if (response.status === 200) {
-        setDisLikes((prev) => prev + 1);
-      }
+      const response = await disLikeAnswerApi(questionId, id);
+      if (response) setDisLikes((prev) => prev + 1);
     } catch (err) {
       console.log(err);
     }
   };
-
   const deleteAnswer = async (answerId: string) => {
     try {
-      const headers = {
-        authorization: jwt,
-      };
-
-      const response = await axios.delete(
-        `${process.env.SERVER_URL}/answers/${answerId}`,
-        {
-          headers,
-        }
-      );
-      console.log("Response from delete:", response);
-      if (response.status === 200) {
-        onDelete(answerId);
-      }
+      const response = await deleteAnswerApi(answerId);
+      if (response) onDelete(answerId);
     } catch (err) {
       console.log(err);
       setShowError(true);

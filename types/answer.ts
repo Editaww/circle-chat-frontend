@@ -7,6 +7,5 @@ export type Answer = {
   gainedLikeNumber: number;
   gainedDisLikeNumber: number;
   onDelete: (answerId: string) => void;
-  // currentUserId?: string;
   questionId: string;
 };

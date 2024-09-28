@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { questionsApi } from "../apiCalls/question";
 import QuestionsWrapper from "../Components/QuestionWrapper/QuestionWrapper";
 import { Question } from "@/types/question";
-
 import PageTemplate from "@/Components/PageTemplate/PageTemplate";
 
 const Home = () => {
@@ -10,10 +9,8 @@ const Home = () => {
 
   const fetchQuestions = async () => {
     try {
-      const response = await axios.get(`${process.env.SERVER_URL}/questions`);
-      console.log(response.data);
-      setQuestions(response.data.questions);
-      console.log(response.data.questions);
+      const response = await questionsApi();
+      setQuestions(response.questions);
     } catch (err) {
       console.log(err);
     }

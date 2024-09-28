@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 import Button from "../Button/Button";
-import cookie from "js-cookie";
-import axios from "axios";
+import { addAnswerApi } from "@/apiCalls/answer";
 
 type AnswerFormProps = {
   userName: string;
@@ -24,21 +23,7 @@ const AnswerForm = ({ questionId, onAnswerAdded }: AnswerFormProps) => {
 
     try {
       setAddAnswer(true);
-      const jwt = cookie.get(process.env.JWT_KEY as string);
-      const body = {
-        userName,
-        answerText,
-      };
-
-      const headers = {
-        authorization: jwt,
-      };
-
-      const response = await axios.post(
-        `${process.env.SERVER_URL}/questions/${questionId}/answers`,
-        body,
-        { headers }
-      );
+      const response = await addAnswerApi(questionId, userName, answerText);
 
       if (response.status === 201) {
         setUserName("");
