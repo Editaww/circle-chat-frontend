@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import Button from "../Button/Button";
 import cookie from "js-cookie";
@@ -14,7 +14,17 @@ const CreateQuestionForm = () => {
 
   const jwt = cookie.get(process.env.JWT_KEY as string);
 
+  useEffect(() => {
+    if (!jwt) {
+      router.push("/login");
+    }
+  }, []);
+
   const addQuestion = async () => {
+    if (!userName || !questionText) {
+      setShowError(true);
+      return;
+    }
     try {
       const body = {
         userName: userName,

@@ -10,7 +10,7 @@ type QuestionCardProps = {
 
 const QuestionCard = ({ id, userName, questionText }: QuestionCardProps) => {
   return (
-    <Link href={`/questionItem/${id}`}>
+    <Link href={`/itemPage/${id}`}>
       <div className={styles.main}>
         <div className={styles.questionLine}>
           <p>Name:</p>

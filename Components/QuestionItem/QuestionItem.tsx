@@ -20,6 +20,7 @@ const QuestionItem = ({ id, userName, questionText }: QuestionProps) => {
   const jwt = cookie.get(process.env.JWT_KEY as string);
 
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isShowError, setShowError] = useState(false);
   const [questionToDelete, setQuestionToDelete] = useState<string | null>(null);
 
   const deleteQuestion = async (questionId: string) => {
@@ -40,7 +41,8 @@ const QuestionItem = ({ id, userName, questionText }: QuestionProps) => {
       }
     } catch (err) {
       console.log(err);
-      router.push("/");
+      setShowError(true);
+      // router.push("/");
     }
   };
 
@@ -58,6 +60,11 @@ const QuestionItem = ({ id, userName, questionText }: QuestionProps) => {
 
   return (
     <div className={styles.main}>
+      {isShowError && (
+        <h5 className={styles.error}>
+          Yuo can only delete question what belongs to You
+        </h5>
+      )}
       <div className={styles.questionInfo}>
         <div className={styles.questionLine}>
           <p>Name:</p>

@@ -12,8 +12,13 @@ const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPasswor] = useState("");
   const [isButtonLoading, setButtonLoading] = useState(false);
+  const [isShowError, setShowError] = useState(false);
 
   const registerUser = async () => {
+    if (!userName || !email || !password) {
+      setShowError(true);
+      return;
+    }
     try {
       setButtonLoading(true);
 
@@ -63,6 +68,9 @@ const RegisterForm = () => {
         title="Register"
         isLoading={isButtonLoading}
       />
+      {isShowError && (
+        <h5 className={styles.error}>All fields must be entered</h5>
+      )}
     </div>
   );
 };
