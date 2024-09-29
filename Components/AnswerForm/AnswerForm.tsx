@@ -41,9 +41,11 @@ const AnswerForm = ({ questionId, onAnswerAdded }: AnswerFormProps) => {
 
   return (
     <div className={styles.main}>
+      <h1>Create Answer</h1>
       <input
         value={userName}
         placeholder="Name"
+        className={styles.input}
         type="text"
         onChange={(e) => {
           setUserName(e.target.value);

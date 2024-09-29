@@ -16,9 +16,6 @@ const ItemPage = () => {
   const [showAnswerForm, setShowAnswerForm] = useState(false);
   const router = useRouter();
 
-  // const currentUserId = cookie.get(process.env.JWT_KEY as string);
-  // console.log("Current User ID:", currentUserId);
-
   const fetchQuestions = async () => {
     const jwt = cookie.get(process.env.JWT_KEY as string);
     if (!jwt) {
@@ -75,6 +72,7 @@ const ItemPage = () => {
 
   const addAnswer = async () => {
     await fetchAnswers();
+    setShowAnswerForm(false);
   };
 
   return (
@@ -89,6 +87,20 @@ const ItemPage = () => {
               date={isQuestion.date}
               userId={isQuestion.userId}
             />
+            {!showAnswerForm && (
+              <Button
+                title="Add Answer"
+                onClick={() => setShowAnswerForm(true)}
+                isLoading={false}
+              />
+            )}
+            {showAnswerForm && (
+              <AnswerForm
+                userName={isQuestion.userName}
+                questionId={isQuestion.id}
+                onAnswerAdded={addAnswer}
+              />
+            )}
 
             <div>
               <h3>Answers:</h3>
@@ -105,26 +117,25 @@ const ItemPage = () => {
                     date={answer.date}
                     questionId={isQuestion.id}
                     onDelete={onDeleteAnswer}
-                    // currentUserId={currentUserId}
                   />
                 ))}
             </div>
 
-            {!showAnswerForm && (
+            {/* {!showAnswerForm && (
               <Button
                 title="Add Answer"
                 onClick={() => setShowAnswerForm(true)}
                 isLoading={false}
               />
-            )}
+            )} */}
 
-            {showAnswerForm && (
+            {/* {showAnswerForm && (
               <AnswerForm
                 userName={isQuestion.userName}
                 questionId={isQuestion.id}
                 onAnswerAdded={addAnswer}
               />
-            )}
+            )} */}
           </div>
         )}
       </div>

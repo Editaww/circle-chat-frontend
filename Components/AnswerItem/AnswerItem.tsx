@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 import Button from "../Button/Button";
-// import cookie from "js-cookie";
-// import axios from "axios";
 import Modal from "../Modal/Modal";
+import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
+import { FaComment } from "react-icons/fa";
+
 import {
   likeAnswerApi,
   disLikeAnswerApi,
@@ -31,8 +32,6 @@ const AnswerItem = ({
   questionId,
   onDelete,
 }: AnswerProps) => {
-  // const jwt = cookie.get(process.env.JWT_KEY as string);
-
   const [isModalOpen, setModalOpen] = useState(false);
   const [answerToDelete, setAnswerToDelete] = useState<string | null>(null);
   const [likes, setLikes] = useState(gainedLikeNumber);
@@ -60,6 +59,7 @@ const AnswerItem = ({
     try {
       const response = await deleteAnswerApi(answerId);
       if (response) onDelete(answerId);
+      setShowError(false);
     } catch (err) {
       console.log(err);
       setShowError(true);
@@ -80,6 +80,7 @@ const AnswerItem = ({
 
   return (
     <div className={styles.main}>
+      {/* <FaComment style={{ fontSize: "24px", color: "black" }} /> */}
       {isShowError && (
         <h5 className={styles.error}>
           Yuo can only delete question what belongs to You
@@ -95,9 +96,15 @@ const AnswerItem = ({
         </div>
         <div className={styles.likesDislikes}>
           <h3>{likes} </h3>
-          <Button title="Like" onClick={likeAnswer} isLoading={false} />
-          <h3>{disLikes} </h3>
-          <Button title="Dislike" onClick={disLikeAnswer} isLoading={false} />
+          <FaThumbsUp
+            onClick={likeAnswer}
+            style={{ fontSize: "24px", cursor: "pointer", color: "black" }}
+          />
+          <h3>{disLikes}</h3>
+          <FaThumbsDown
+            onClick={disLikeAnswer}
+            style={{ fontSize: "24px", cursor: "pointer", color: "black" }}
+          />
         </div>
 
         <Button

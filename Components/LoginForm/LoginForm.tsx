@@ -35,6 +35,7 @@ const LoginForm = () => {
 
   return (
     <div className={styles.main}>
+      <h1>Login</h1>
       <input
         onChange={(e) => {
           setName(e.target.value);

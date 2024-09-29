@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 import { addQuestionApi } from "@/apiCalls/question";
 import cookie from "js-cookie";
 import { useRouter } from "next/router";
+import { FaQuestionCircle } from "react-icons/fa";
 
 const CreateQuestionForm = () => {
   const [userName, setUserName] = useState("");
@@ -38,15 +39,20 @@ const CreateQuestionForm = () => {
 
   return (
     <div className={styles.main}>
+      <div className={styles.title}>
+        <h1>Create Question</h1>
+        <FaQuestionCircle style={{ fontSize: "24px", color: "black" }} />
+      </div>
       <input
         value={userName}
         placeholder="Name"
+        className={styles.input}
         type="text"
         onChange={(e) => {
           setUserName(e.target.value);
         }}
       />
-      <input
+      <textarea
         value={questionText}
         placeholder="Question Text"
         className={styles.textarea}

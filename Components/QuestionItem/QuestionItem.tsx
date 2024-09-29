@@ -65,13 +65,13 @@ const QuestionItem = ({ id, userName, questionText }: QuestionProps) => {
           Yuo can only delete question what belongs to You
         </h5>
       )}
-      <div className={styles.questionInfo}>
-        <div className={styles.questionLine}>
+      <div className={styles.itemInfo}>
+        <div className={styles.itemName}>
           <p>Name:</p>
-          <h3>{userName}</h3>
+          <h4>{userName}</h4>
         </div>
         <div className={styles.itemLine}>
-          <h3>{questionText}</h3>
+          <p>{questionText}</p>
         </div>
 
         <Button

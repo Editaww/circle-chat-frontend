@@ -38,6 +38,7 @@ const RegisterForm = () => {
 
   return (
     <div className={styles.main}>
+      <h1>Register</h1>
       <input
         onChange={(e) => {
           setUserName(e.target.value);

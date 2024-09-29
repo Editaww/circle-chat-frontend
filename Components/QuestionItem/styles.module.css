@@ -1,26 +1,40 @@
 .main {
-  height: 200px;
+  height: 100px;
   display: flex;
-  justify-content: center;
-  gap: 10rem;
-  align-items: center;
+  padding-left: 6rem;
+  padding-right: 2rem;
   background-color: rgb(216, 212, 212);
-  margin-top: 4rem;
-  margin-bottom: 4rem;
+  margin-right: 2rem;
+  margin-left: 2rem;
+  margin-top: 1.2rem;
   box-shadow: -1px 5px 16px 0px rgba(0, 0, 0, 0.75);
 }
+
 .itemInfo {
+  width: 100%;
   display: flex;
-  padding-left: 4rem;
-  gap: 6rem;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
 }
+
+.itemName {
+  display: flex;
+  gap: 0.3rem;
+}
+
 .itemLine {
   display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
+  font-size: 20px;
 }
+
 .main button {
-  width: 200px;
+  width: 150px;
+  margin-left: auto;
+}
+
+.error {
+  color: brown;
 }
 
 @media (max-width: 768px) {
@@ -31,7 +45,7 @@
   .itemInfo {
     flex-direction: column;
 
-    gap: 2rem;
+    /* gap: 1rem; */
     text-align: center;
   }
 
@@ -40,13 +54,14 @@
   }
 
   .main button {
-    width: 100%; /* Mygtukas užima visą plotį mobilioje versijoje */
+    width: 150px; /* Mygtukas užima visą plotį mobilioje versijoje */
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 400px) {
   .main {
     flex-direction: column;
     gap: 1.5rem;
+
     padding: 1rem;
     height: auto;
     justify-content: center;

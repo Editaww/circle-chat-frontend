@@ -8,3 +8,7 @@
   font-size: medium;
   border-radius: 7px;
 }
+.button:hover {
+  background-color: var(--primary-color);
+  color: white;
+}

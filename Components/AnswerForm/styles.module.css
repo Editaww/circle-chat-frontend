@@ -1,12 +1,52 @@
-.textarea {
+.main {
   width: 100%;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 100vh;
+  padding-top: 4rem;
+  padding-left: 6rem;
+  background-color: var(--secondary-color);
+  align-items: center;
+}
+.title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.textarea {
+  width: 70%;
+  padding: 0.8rem;
   font-size: 16px;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  background-color: var(--quaternary-color);
+  border-color: var(--secondary-color);
+  border-top: var(--secondary-color);
+  border-left: var(--secondary-color);
+  outline: none;
+  min-height: 100px;
+}
+
+.input {
+  width: 70%;
+  padding: 0.8rem;
+  background-color: var(--quaternary-color);
+  border-color: var(--secondary-color);
+  border-top: var(--secondary-color);
+  border-left: var(--secondary-color);
+  outline: none;
+}
+.main button {
+  width: 70%;
+  background-color: var(--primary-color);
+  height: 40px;
+  font-size: large;
+  font-weight: bolder;
 }
 
 .error {
-  color: red;
-  font-size: 14px;
+  color: brown;
+  margin: 0;
+  align-items: center;
+  font-size: 17px;
 }

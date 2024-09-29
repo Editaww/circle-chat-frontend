@@ -12,12 +12,12 @@ const QuestionCard = ({ id, userName, questionText }: QuestionCardProps) => {
   return (
     <Link href={`/itemPage/${id}`}>
       <div className={styles.main}>
-        <div className={styles.questionLine}>
+        <div className={styles.questionInfo}>
           <p>Name:</p>
-          <h3>{userName}</h3>
+          <h4>{userName}</h4>
         </div>
         <div className={styles.questionLine}>
-          <h3>{questionText}</h3>
+          <p>{questionText}</p>
         </div>
       </div>
     </Link>
