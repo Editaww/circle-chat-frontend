@@ -5,7 +5,6 @@
   gap: 1rem;
   min-height: 100vh;
   padding-top: 4rem;
-  padding-left: 6rem;
   background-color: var(--secondary-color);
   align-items: center;
 }
@@ -25,6 +24,10 @@
   border-left: var(--secondary-color);
   outline: none;
   min-height: 100px;
+  .itemInfo {
+    flex-direction: column;
+    text-align: center;
+  }
 }
 
 .input {

@@ -40,38 +40,40 @@ const AnswerForm = ({ questionId, onAnswerAdded }: AnswerFormProps) => {
   };
 
   return (
-    <div className={styles.main}>
-      <h1>Create Answer</h1>
-      <input
-        value={userName}
-        placeholder="Name"
-        className={styles.input}
-        type="text"
-        onChange={(e) => {
-          setUserName(e.target.value);
-        }}
-      />
-      <textarea
-        value={answerText}
-        placeholder="Enter your answer"
-        className={styles.textarea}
-        onChange={(e) => {
-          setAnswerText(e.target.value);
-          if (e.target.value) {
-            setShowError(false);
-          }
-        }}
-      />
-      {isShowError && (
-        <h5 className={styles.error}>Answer field must be filled</h5>
-      )}
-      <Button
-        isLoading={isAddAnswer}
-        title="Add Answer"
-        onClick={() => {
-          addAnswer();
-        }}
-      />
+    <div className={styles.background}>
+      <div className={styles.main}>
+        <h1>Create Answer</h1>
+        <input
+          value={userName}
+          placeholder="Name"
+          className={styles.input}
+          type="text"
+          onChange={(e) => {
+            setUserName(e.target.value);
+          }}
+        />
+        <textarea
+          value={answerText}
+          placeholder="Enter your answer"
+          className={styles.textarea}
+          onChange={(e) => {
+            setAnswerText(e.target.value);
+            if (e.target.value) {
+              setShowError(false);
+            }
+          }}
+        />
+        {isShowError && (
+          <h5 className={styles.error}>Answer field must be filled</h5>
+        )}
+        <Button
+          isLoading={isAddAnswer}
+          title="Add Answer"
+          onClick={() => {
+            addAnswer();
+          }}
+        />
+      </div>
     </div>
   );
 };

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
+import { deleteQuestionApi } from "@/apiCalls/question";
 import Button from "../Button/Button";
-import cookie from "js-cookie";
 import { useRouter } from "next/router";
-import axios from "axios";
 import Modal from "../Modal/Modal";
 
 type QuestionProps = {
@@ -14,10 +13,8 @@ type QuestionProps = {
   userId: string;
 };
 
-const QuestionItem = ({ id, userName, questionText }: QuestionProps) => {
+const QuestionItem = ({ id, userName, questionText, date }: QuestionProps) => {
   const router = useRouter();
-
-  const jwt = cookie.get(process.env.JWT_KEY as string);
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [isShowError, setShowError] = useState(false);
@@ -25,24 +22,14 @@ const QuestionItem = ({ id, userName, questionText }: QuestionProps) => {
 
   const deleteQuestion = async (questionId: string) => {
     try {
-      const headers = {
-        authorization: jwt,
-      };
+      const response = await deleteQuestionApi(questionId);
 
-      const response = await axios.delete(
-        `${process.env.SERVER_URL}/questions/${questionId}`,
-        {
-          headers,
-        }
-      );
-
-      if (response.status === 200) {
+      if (response && response.status === 200) {
         router.push("/");
       }
     } catch (err) {
       console.log(err);
       setShowError(true);
-      // router.push("/");
     }
   };
 
@@ -59,36 +46,40 @@ const QuestionItem = ({ id, userName, questionText }: QuestionProps) => {
   };
 
   return (
-    <div className={styles.main}>
-      {isShowError && (
-        <h5 className={styles.error}>
-          Yuo can only delete question what belongs to You
-        </h5>
-      )}
-      <div className={styles.itemInfo}>
-        <div className={styles.itemName}>
-          <p>Name:</p>
-          <h4>{userName}</h4>
-        </div>
-        <div className={styles.itemLine}>
-          <p>{questionText}</p>
+    <div className={styles.background}>
+      <div className={styles.main}>
+        <div className={styles.itemInfo}>
+          <div className={styles.itemName}>
+            <p>Name:</p>
+            <h4>{userName}</h4>
+          </div>
+          <div className={styles.itemLine}>
+            <p>{questionText}</p>
+            <p className={styles.dateText}>
+              {new Date(date).toLocaleDateString()}
+            </p>
+          </div>
+          {isShowError && (
+            <h5 className={styles.error}>
+              Yuo can only delete question what belongs to You
+            </h5>
+          )}
+          <Button
+            title="Delete Question"
+            onClick={confirmDelete}
+            isLoading={false}
+          />
         </div>
 
-        <Button
-          title="Delete Question"
-          onClick={confirmDelete}
-          isLoading={false}
-        />
+        {isModalOpen && (
+          <Modal
+            title={"Delete Question?"}
+            subtitle={"Are you sure you want to delete this Question?"}
+            onConfirm={deleteConfirmation}
+            onModalClose={() => setModalOpen(false)}
+          />
+        )}
       </div>
-
-      {isModalOpen && (
-        <Modal
-          title={"Delete Question?"}
-          subtitle={"Are you sure you want to delete this Question?"}
-          onConfirm={deleteConfirmation}
-          onModalClose={() => setModalOpen(false)}
-        />
-      )}
     </div>
   );
 };

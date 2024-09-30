@@ -10,16 +10,19 @@ type QuestionWrapperProps = {
 const QuestionWrapper = ({ questions }: QuestionWrapperProps) => {
   return (
     <div className={styles.main}>
-      {questions.map((q) => {
-        return (
-          <QuestionCard
-            key={q.id}
-            id={q.id}
-            userName={q.userName}
-            questionText={q.questionText}
-          />
-        );
-      })}
+      {questions
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        .map((q) => {
+          return (
+            <QuestionCard
+              key={q.id}
+              id={q.id}
+              userName={q.userName}
+              questionText={q.questionText}
+              date={q.date}
+            />
+          );
+        })}
     </div>
   );
 };

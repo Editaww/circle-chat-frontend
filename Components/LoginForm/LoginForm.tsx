@@ -61,9 +61,8 @@ const LoginForm = () => {
         type="password"
       ></input>
 
-      {isShowError && <h5 className={styles.error}>Bad email or password</h5>}
-
       <Button onClick={loginUser} title="Login" isLoading={isButtonLoading} />
+      {isShowError && <h5 className={styles.error}>Bad email or password</h5>}
     </div>
   );
 };

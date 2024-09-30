@@ -1,17 +1,19 @@
 .main {
+  height: auto;
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
   min-height: 100vh;
   padding-top: 4rem;
-  padding-left: 6rem;
+}
+.background {
   background-color: var(--secondary-color);
-  align-items: center;
 }
 .title {
   display: flex;
-  align-items: center;
+
   gap: 1rem;
 }
 .textarea {

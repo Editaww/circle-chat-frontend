@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Question } from "@/types/question";
 import { Answer } from "../../types/answer";
 import { useRouter } from "next/router";
+import { questionByIdApi } from "../../apiCalls/question";
+import { answersApi } from "../../apiCalls/answer";
 import QuestionItem from "../../Components/QuestionItem/QuestionItem";
 import PageTemplate from "@/Components/PageTemplate/PageTemplate";
-import cookie from "js-cookie";
 import AnswerForm from "../../Components/AnswerForm/AnswerForm";
 import AnswerItem from "../../Components/AnswerItem/AnswerItem";
 import Button from "../../Components/Button/Button";
+import styles from "../../Components/AnswerItem/styles.module.css";
+import { FaComment } from "react-icons/fa";
 
 const ItemPage = () => {
   const [isQuestion, setQuestion] = useState<Question | null>(null);
@@ -16,50 +18,26 @@ const ItemPage = () => {
   const [showAnswerForm, setShowAnswerForm] = useState(false);
   const router = useRouter();
 
-  const fetchQuestions = async () => {
-    const jwt = cookie.get(process.env.JWT_KEY as string);
-    if (!jwt) {
+  const fetchQuestionsById = async () => {
+    const response = await questionByIdApi(router.query.id as string);
+    if (response) {
+      setQuestion(response);
+    } else {
       router.push("/login");
-      return;
-    }
-
-    const headers = {
-      authorization: jwt,
-    };
-
-    try {
-      const fetchedQuestions = await axios.get(
-        `${process.env.SERVER_URL}/questions/${router.query.id}`,
-        { headers }
-      );
-      setQuestion(fetchedQuestions.data.question);
-    } catch (err) {
-      console.log(err);
     }
   };
 
   const fetchAnswers = async () => {
-    const jwt = cookie.get(process.env.JWT_KEY as string);
-    if (!jwt) return;
+    const response = await answersApi(router.query.id as string);
 
-    const headers = {
-      authorization: jwt,
-    };
-
-    try {
-      const fetchedAnswers = await axios.get(
-        `${process.env.SERVER_URL}/questions/${router.query.id}/answers`,
-        { headers }
-      );
-      setAnswers(fetchedAnswers.data.answer);
-    } catch (err) {
-      console.log(err);
+    if (response) {
+      setAnswers(response);
     }
   };
 
   useEffect(() => {
     if (router.query.id) {
-      fetchQuestions();
+      fetchQuestionsById();
       fetchAnswers();
     }
   }, [router.query.id]);
@@ -77,67 +55,62 @@ const ItemPage = () => {
 
   return (
     <PageTemplate>
-      <div>
-        {isQuestion && (
-          <div>
-            <QuestionItem
-              id={isQuestion.id}
-              userName={isQuestion.userName}
-              questionText={isQuestion.questionText}
-              date={isQuestion.date}
-              userId={isQuestion.userId}
-            />
-            {!showAnswerForm && (
-              <Button
-                title="Add Answer"
-                onClick={() => setShowAnswerForm(true)}
-                isLoading={false}
-              />
-            )}
-            {showAnswerForm && (
-              <AnswerForm
-                userName={isQuestion.userName}
-                questionId={isQuestion.id}
-                onAnswerAdded={addAnswer}
-              />
-            )}
-
+      <div className={styles.background}>
+        <div>
+          {isQuestion && (
             <div>
-              <h3>Answers:</h3>
-              {answers.length > 0 &&
-                answers.map((answer) => (
-                  <AnswerItem
-                    key={answer.id}
-                    id={answer.id}
-                    userName={answer.userName}
-                    userId={answer.userId}
-                    answerText={answer.answerText}
-                    gainedLikeNumber={answer.gainedLikeNumber}
-                    gainedDisLikeNumber={answer.gainedDisLikeNumber}
-                    date={answer.date}
-                    questionId={isQuestion.id}
-                    onDelete={onDeleteAnswer}
-                  />
-                ))}
-            </div>
-
-            {/* {!showAnswerForm && (
-              <Button
-                title="Add Answer"
-                onClick={() => setShowAnswerForm(true)}
-                isLoading={false}
-              />
-            )} */}
-
-            {/* {showAnswerForm && (
-              <AnswerForm
+              <QuestionItem
+                id={isQuestion.id}
                 userName={isQuestion.userName}
-                questionId={isQuestion.id}
-                onAnswerAdded={addAnswer}
+                questionText={isQuestion.questionText}
+                date={isQuestion.date}
+                userId={isQuestion.userId}
               />
-            )} */}
-          </div>
-        )}
+              {!showAnswerForm && (
+                <Button
+                  title="You Answer"
+                  onClick={() => setShowAnswerForm(true)}
+                  isLoading={false}
+                  style={{ marginLeft: "2rem", width: "150px" }}
+                />
+              )}
+              {showAnswerForm && (
+                <AnswerForm
+                  userName={isQuestion.userName}
+                  questionId={isQuestion.id}
+                  onAnswerAdded={addAnswer}
+                />
+              )}
+
+              <div>
+                <div className={styles.answer}>
+                  <h1>Answers:</h1>
+                  <FaComment style={{ fontSize: "40px", color: "black" }} />
+                </div>
+                {answers.length > 0 &&
+                  answers
+                    .sort(
+                      (a, b) =>
+                        new Date(b.date).getTime() - new Date(a.date).getTime()
+                    )
+                    .map((answer) => (
+                      <AnswerItem
+                        key={answer.id}
+                        id={answer.id}
+                        userName={answer.userName}
+                        userId={answer.userId}
+                        answerText={answer.answerText}
+                        gainedLikeNumber={answer.gainedLikeNumber}
+                        gainedDisLikeNumber={answer.gainedDisLikeNumber}
+                        date={answer.date}
+                        questionId={isQuestion.id}
+                        onDelete={onDeleteAnswer}
+                      />
+                    ))}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </PageTemplate>
   );

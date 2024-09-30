@@ -1,6 +1,26 @@
 import axios from "axios";
 import cookie from "js-cookie";
 
+export const answersApi = async (questionId: string) => {
+  const jwt = cookie.get(process.env.JWT_KEY as string);
+  if (!jwt) return;
+
+  const headers = {
+    authorization: jwt,
+  };
+
+  try {
+    const response = await axios.get(
+      `${process.env.SERVER_URL}/questions/${questionId}/answers`,
+      { headers }
+    );
+    return response.data.answer;
+  } catch (err) {
+    console.log(err);
+    return;
+  }
+};
+
 export const addAnswerApi = async (
   questionId: string,
   userName: string,

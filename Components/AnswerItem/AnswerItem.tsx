@@ -3,7 +3,6 @@ import styles from "./styles.module.css";
 import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
-import { FaComment } from "react-icons/fa";
 
 import {
   likeAnswerApi,
@@ -27,6 +26,7 @@ const AnswerItem = ({
   id,
   userName,
   answerText,
+  date,
   gainedLikeNumber,
   gainedDisLikeNumber,
   questionId,
@@ -79,49 +79,48 @@ const AnswerItem = ({
   };
 
   return (
-    <div className={styles.main}>
-      {/* <FaComment style={{ fontSize: "24px", color: "black" }} /> */}
-      {isShowError && (
-        <h5 className={styles.error}>
-          Yuo can only delete question what belongs to You
-        </h5>
-      )}
-      <div className={styles.answerInfo}>
-        <div className={styles.answerLine}>
-          <p>Name:</p>
-          <h3>{userName}</h3>
-        </div>
-        <div className={styles.itemLine}>
-          <h3>{answerText}</h3>
-        </div>
+    <div className={styles.background}>
+      <div className={styles.main}>
         <div className={styles.likesDislikes}>
-          <h3>{likes} </h3>
-          <FaThumbsUp
-            onClick={likeAnswer}
-            style={{ fontSize: "24px", cursor: "pointer", color: "black" }}
-          />
-          <h3>{disLikes}</h3>
-          <FaThumbsDown
-            onClick={disLikeAnswer}
-            style={{ fontSize: "24px", cursor: "pointer", color: "black" }}
+          <p>{likes} </p>
+          <FaThumbsUp onClick={likeAnswer} />
+          <p>{disLikes}</p>
+          <FaThumbsDown onClick={disLikeAnswer} />
+        </div>
+
+        {isShowError && (
+          <h5 className={styles.error}>
+            Yuo can only delete question what belongs to You
+          </h5>
+        )}
+        <div className={styles.itemInfo}>
+          <div className={styles.itemName}>
+            <p>Name:</p>
+            <h4>{userName}</h4>
+          </div>
+          <div className={styles.itemLine}>
+            <p>{answerText}</p>
+            <p className={styles.dateText}>
+              {new Date(date).toLocaleDateString()}
+            </p>
+          </div>
+
+          <Button
+            title="Delete Answer"
+            onClick={confirmDelete}
+            isLoading={false}
           />
         </div>
 
-        <Button
-          title="Delete Answer"
-          onClick={confirmDelete}
-          isLoading={false}
-        />
+        {isModalOpen && (
+          <Modal
+            title={"Delete Answer?"}
+            subtitle={"Are you sure you want to delete this Answer?"}
+            onConfirm={deleteConfirmation}
+            onModalClose={() => setModalOpen(false)}
+          />
+        )}
       </div>
-
-      {isModalOpen && (
-        <Modal
-          title={"Delete Answer?"}
-          subtitle={"Are you sure you want to delete this Answer?"}
-          onConfirm={deleteConfirmation}
-          onModalClose={() => setModalOpen(false)}
-        />
-      )}
     </div>
   );
 };

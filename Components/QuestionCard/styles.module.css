@@ -18,6 +18,10 @@
 .questionLine {
   font-size: 20px;
 }
+.dateText {
+  padding-top: 0.5rem;
+  font-size: 15px;
+}
 
 @media (max-width: 768px) {
   .main {

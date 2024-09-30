@@ -26,6 +26,10 @@
   align-items: center;
   gap: 2rem;
 }
+.header button {
+  background-color: var(--secondary-color);
+  width: 100px;
+}
 
 @media (max-width: 768px) {
   .header {

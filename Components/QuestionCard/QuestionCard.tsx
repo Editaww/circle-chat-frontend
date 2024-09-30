@@ -6,9 +6,15 @@ type QuestionCardProps = {
   id: string;
   userName: string;
   questionText: string;
+  date: Date;
 };
 
-const QuestionCard = ({ id, userName, questionText }: QuestionCardProps) => {
+const QuestionCard = ({
+  id,
+  userName,
+  questionText,
+  date,
+}: QuestionCardProps) => {
   return (
     <Link href={`/itemPage/${id}`}>
       <div className={styles.main}>
@@ -18,6 +24,9 @@ const QuestionCard = ({ id, userName, questionText }: QuestionCardProps) => {
         </div>
         <div className={styles.questionLine}>
           <p>{questionText}</p>
+          <p className={styles.dateText}>
+            {new Date(date).toLocaleDateString()}
+          </p>
         </div>
       </div>
     </Link>
