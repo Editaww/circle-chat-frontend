@@ -11,4 +11,5 @@
 }
 .button:hover {
   color: black;
+  height: 35px;
 }

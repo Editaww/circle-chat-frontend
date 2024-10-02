@@ -46,7 +46,6 @@
 
 .main button {
   width: 150px;
-  margin-left: 1rem;
   align-self: flex-end;
 }
 .error {
@@ -73,7 +72,7 @@
   }
 
   .main button {
-    width: 40%;
+    width: 45%;
     margin-top: 1rem;
   }
 }
@@ -84,7 +83,7 @@
     height: auto;
   }
   .main button {
-    width: 40%;
-    margin-top: 0.5rem;
+    width: 45%;
+    height: 30px;
   }
 }
