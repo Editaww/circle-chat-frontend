@@ -29,6 +29,10 @@
   flex-wrap: wrap;
   gap: 0.5rem;
 }
+.itemName {
+  display: flex;
+  gap: 0.5rem;
+}
 
 .itemLine {
   height: auto;
