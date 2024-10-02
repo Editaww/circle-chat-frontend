@@ -77,13 +77,13 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 380px) {
   .main {
     flex-direction: column;
     height: auto;
   }
   .main button {
-    width: 45%;
+    width: 46%;
     height: 30px;
   }
 }

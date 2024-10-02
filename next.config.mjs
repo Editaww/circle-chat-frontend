@@ -4,6 +4,7 @@ const nextConfig = {
   env: {
     // SERVER_URL: "http://localhost:3000",
     SERVER_URL: "https://travel-spot-api.onrender.com",
+
     JWT_KEY: "question_app_jwt",
   },
 };

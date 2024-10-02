@@ -45,3 +45,9 @@
     gap: 1rem;
   }
 }
+@media (max-width: 380px) {
+  .headers button {
+    height: 50px;
+    border-radius: 0px;
+  }
+}
