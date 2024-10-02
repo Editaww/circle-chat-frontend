@@ -1,31 +1,36 @@
 .modal {
-  background-color: rgb(205, 204, 204);
-  width: 500px;
-  height: 400px;
+  background-color: var(--quaternary-color);
+  width: 450px;
+  height: 280px;
   position: fixed;
   top: 50%;
   left: 50%;
   border-radius: 0.5rem;
   transform: translate(-50%, -50%);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: -1px 5px 16px 0px rgba(0, 0, 0, 0.75);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  text-align: center;
+  gap: 3rem;
+  color: brown;
 }
 
 .modal button {
-  background-color: rgb(91, 91, 91);
-  border-color: rgb(213, 213, 210);
+  background-color: var(--primary-color);
+  border-color: var(--quaternary-color);
   border-radius: 0.5rem;
-  height: 40px;
-  width: 100px;
-  margin-top: 20px;
+  height: 30px;
+  width: 80px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-left: 1rem;
   font-size: medium;
   font-weight: 500;
   color: white;
 }
-.modal h2 {
-  color: rgb(176, 46, 46);
+.modal button:hover {
+  color: black;
 }

@@ -1,48 +1,51 @@
 .main {
   height: auto;
   display: flex;
+  flex-direction: column;
   padding-left: 3rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
   padding-right: 2rem;
   background-color: var(--quaternary-color);
   margin-right: 2rem;
-  margin-left: rem;
+  margin-left: 2rem;
+  margin-bottom: 1rem;
   gap: 1rem;
-  /* flex-wrap: wrap; */
-
-  /* word-wrap: break-word;
-  overflow-wrap: break-word; */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 .background {
+  min-height: 100vh;
   background-color: var(--secondary-color);
-  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
   padding-bottom: 2rem;
 }
-
 .itemInfo {
+  height: auto;
   width: 100%;
   display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-.itemName {
-  display: flex;
-  gap: 0.3rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .itemLine {
+  height: auto;
   display: flex;
   flex-direction: column;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  white-space: normal;
   gap: 0.5rem;
+  width: 100%;
   font-size: 20px;
 }
+
 .dateText {
   font-size: 15px;
 }
+
 .likesDislikes {
   display: flex;
   gap: 0.8rem;
@@ -52,11 +55,14 @@
   align-items: center;
   margin-right: 1rem;
 }
+
 .answer {
+  background-color: var(--secondary-color);
+  height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
   gap: 1rem;
+  padding-bottom: 1rem;
 }
 
 .main button {
@@ -67,36 +73,39 @@
 .error {
   color: brown;
   font-size: 17px;
+  text-align: center;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
   .main {
-    height: auto;
-    flex-wrap: wrap;
-  }
-  .likesDislikes {
-    display: flex;
-    gap: 0.5rem;
-  }
-  .itemInfo {
-    gap: 1rem;
-  }
-  .itemLine {
-    flex-direction: column;
-    text-align: center;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+    flex-wrap: wrap;
   }
+
+  .likesDislikes {
+    gap: 0.5rem;
+  }
+
   .itemInfo {
+    gap: 1rem;
     flex-direction: column;
     text-align: center;
   }
 
+  .itemLine {
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   .main button {
-    width: 150px;
+    width: 40%;
     margin-top: 0.5rem;
   }
 }
+
 @media (max-width: 400px) {
   .main {
     flex-direction: column;
@@ -104,5 +113,7 @@
     height: auto;
     justify-content: center;
     align-items: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }

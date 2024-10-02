@@ -1,45 +1,27 @@
 .header {
-  height: 100px;
-  background-color: var(--primary-color);
-  padding: 1rem 3rem;
+  height: 250px;
+  background-image: url(https://static.vecteezy.com/system/resources/thumbnails/029/592/352/small_2x/landscape-with-country-road-empty-asphalt-road-on-sunset-background-multicolor-vibrant-outdoors-horizontal-image-generative-ai-illustration-free-photo.jpg);
+  background-size: cover;
+  background-position: center;
   display: flex;
+  gap: 2rem;
   align-items: center;
-  justify-content: space-between;
+  padding-left: 6rem;
+  color: white;
 }
 .logo {
-  font-size: xx-large;
+  font-size: 50px;
 }
-
-.header ul {
-  display: flex;
-  list-style: none;
-  gap: 1rem;
+.title {
+  padding-top: 1rem;
 }
-.header a {
-  text-decoration: none;
-  font-size: large;
-  color: black;
-}
-.header ul li {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-}
-.header button {
-  background-color: var(--secondary-color);
-  width: 100px;
-}
-
 @media (max-width: 768px) {
   .header {
-    padding: 0.5rem 1rem;
-  }
-  .header button {
-    font-size: small;
-    height: 35px;
-  }
-  .header ul li {
-    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0rem;
+    padding-left: 0;
   }
 }

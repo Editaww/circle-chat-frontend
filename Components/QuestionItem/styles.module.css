@@ -1,55 +1,59 @@
 .main {
   height: auto;
   display: flex;
-  padding-left: 3rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  padding-right: 2rem;
-  background-color: var(--quaternary-color);
-  margin-right: 2rem;
+  flex-direction: column;
+  max-width: 100%;
+  gap: 1rem;
+  padding: 2rem;
   margin-left: 2rem;
-  flex-wrap: wrap;
+  margin-right: 2rem;
+  background-color: var(--quaternary-color);
   box-shadow: -1px 5px 16px 0px rgba(0, 0, 0, 0.75);
+  color: black;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
+
 .background {
   background-color: var(--secondary-color);
   padding-top: 2rem;
   padding-bottom: 2rem;
-  /* text-align: center; */
 }
 
 .itemInfo {
-  width: 100%;
+  max-width: 100%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+
   gap: 1rem;
 }
-
 .itemName {
   display: flex;
   gap: 0.3rem;
 }
 
 .itemLine {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
   font-size: 20px;
-  padding-right: 2rem;
-  padding-left: 2rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
+
 .dateText {
   font-size: 15px;
 }
 
 .main button {
   width: 150px;
-  margin-left: auto;
+  margin-left: 1rem;
+  align-self: flex-end;
 }
-
 .error {
   color: brown;
   font-size: 17px;
+  text-align: center;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -61,18 +65,26 @@
   .itemInfo {
     flex-direction: column;
     text-align: center;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+  }
+
+  .itemLine {
+    width: 100%;
+    text-align: center;
   }
 
   .main button {
-    width: 150px;
-    margin-top: 0.5rem;
+    width: 40%;
+    margin-top: 1rem;
   }
 }
+
 @media (max-width: 400px) {
   .main {
     flex-direction: column;
     height: auto;
+  }
+  .main button {
+    width: 40%;
+    margin-top: 0.5rem;
   }
 }

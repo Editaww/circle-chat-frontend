@@ -54,29 +54,22 @@ export const addQuestionApi = async (
 };
 
 export const deleteQuestionApi = async (questionId: string) => {
-  const jwt = cookie.get(process.env.JWT_KEY as string);
-  if (!jwt) return;
-  const headers = {
-    authorization: jwt,
-  };
-
   try {
+    const jwt = cookie.get(process.env.JWT_KEY as string);
+    if (!jwt) {
+      console.error("JWT token not found");
+      return;
+    }
+
+    const headers = { authorization: jwt };
+
     const response = await axios.delete(
       `${process.env.SERVER_URL}/questions/${questionId}`,
 
       { headers }
     );
-    return response;
+    return response.status === 200;
   } catch (err) {
-    //     console.log(err);
-    //   }
-    // };
-    if (err.response) {
-      // Jei serveris grąžino atsakymą su klaida
-      console.log("Error message:", err.response.data.message);
-      alert(err.response.data.message); // Galite rodyti pranešimą vartotojui
-    } else {
-      console.error("Error message:", err.message);
-    }
+    console.log(err);
   }
 };

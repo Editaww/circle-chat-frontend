@@ -1,11 +1,11 @@
 .main {
-  height: 100px;
+  height: auto;
   display: flex;
-  padding-left: 6rem;
-  gap: 3rem;
-  align-items: center;
+  flex-direction: column;
+  max-width: 100%;
+  gap: 1rem;
+  padding: 2rem;
   background-color: var(--quaternary-color);
-  /* margin-top: 1rem; */
   box-shadow: -1px 5px 16px 0px rgba(0, 0, 0, 0.75);
   color: black;
 }
@@ -16,7 +16,13 @@
 }
 
 .questionLine {
+  display: flex;
+  flex-direction: column;
   font-size: 20px;
+  width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 .dateText {
   padding-top: 0.5rem;

@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 :root {
-  --primary-color: rgb(155, 107, 96);
+  --primary-color: rgb(126, 79, 69);
   --secondary-color: rgb(210, 188, 183);
   --tertiary-color: rgb(227, 207, 202);
   --quaternary-color: rgb(216, 212, 212);

@@ -15,6 +15,17 @@ const LoginForm = () => {
   const [isButtonLoading, setButtonLoading] = useState(false);
 
   const loginUser = async () => {
+    if (!name || !email || !password) {
+      setShowError(true);
+      return;
+    }
+
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!regex.test(email)) {
+      setShowError(true);
+      return;
+    }
+
     try {
       setButtonLoading(true);
 
@@ -38,7 +49,10 @@ const LoginForm = () => {
       <h1>Login</h1>
       <input
         onChange={(e) => {
-          setName(e.target.value);
+          setName(
+            (e.target.value =
+              e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1))
+          );
         }}
         value={name}
         placeholder="Name"
@@ -46,12 +60,13 @@ const LoginForm = () => {
       ></input>
       <input
         onChange={(e) => {
-          setEmail(e.target.value);
+          const email = e.target.value;
+          setEmail(email);
         }}
         value={email}
         placeholder="Email"
         type="text"
-      ></input>
+      />
       <input
         onChange={(e) => {
           setPasswor(e.target.value);

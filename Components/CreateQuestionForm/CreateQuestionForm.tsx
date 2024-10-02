@@ -49,7 +49,10 @@ const CreateQuestionForm = () => {
         className={styles.input}
         type="text"
         onChange={(e) => {
-          setUserName(e.target.value);
+          setUserName(
+            (e.target.value =
+              e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1))
+          );
         }}
       />
       <textarea

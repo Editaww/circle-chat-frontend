@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./styles.module.css";
 import { deleteQuestionApi } from "@/apiCalls/question";
 import Button from "../Button/Button";
-import { useRouter } from "next/router";
+import { format } from "date-fns";
 import Modal from "../Modal/Modal";
 
 type QuestionProps = {
@@ -14,21 +14,16 @@ type QuestionProps = {
 };
 
 const QuestionItem = ({ id, userName, questionText, date }: QuestionProps) => {
-  const router = useRouter();
-
   const [isModalOpen, setModalOpen] = useState(false);
   const [isShowError, setShowError] = useState(false);
   const [questionToDelete, setQuestionToDelete] = useState<string | null>(null);
 
   const deleteQuestion = async (questionId: string) => {
-    try {
-      const response = await deleteQuestionApi(questionId);
-
-      if (response && response.status === 200) {
-        router.push("/");
-      }
-    } catch (err) {
-      console.log(err);
+    const response = await deleteQuestionApi(questionId);
+    if (response === true) {
+      setShowError(false);
+    } else {
+      console.log(response);
       setShowError(true);
     }
   };
@@ -56,7 +51,7 @@ const QuestionItem = ({ id, userName, questionText, date }: QuestionProps) => {
           <div className={styles.itemLine}>
             <p>{questionText}</p>
             <p className={styles.dateText}>
-              {new Date(date).toLocaleDateString()}
+              {format(new Date(date), "yyyy.MM.dd")}
             </p>
           </div>
           {isShowError && (
@@ -73,8 +68,7 @@ const QuestionItem = ({ id, userName, questionText, date }: QuestionProps) => {
 
         {isModalOpen && (
           <Modal
-            title={"Delete Question?"}
-            subtitle={"Are you sure you want to delete this Question?"}
+            title={"Are you sure you want to delete this Question?"}
             onConfirm={deleteConfirmation}
             onModalClose={() => setModalOpen(false)}
           />

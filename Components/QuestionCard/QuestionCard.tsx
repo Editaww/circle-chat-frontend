@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./styles.module.css";
 import Link from "next/link";
+import { format } from "date-fns";
 
 type QuestionCardProps = {
   id: string;
@@ -25,7 +26,7 @@ const QuestionCard = ({
         <div className={styles.questionLine}>
           <p>{questionText}</p>
           <p className={styles.dateText}>
-            {new Date(date).toLocaleDateString()}
+            {format(new Date(date), "yyyy.MM.dd")}
           </p>
         </div>
       </div>

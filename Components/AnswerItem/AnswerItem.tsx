@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
+import { format } from "date-fns";
 
 import {
   likeAnswerApi,
@@ -56,12 +57,12 @@ const AnswerItem = ({
     }
   };
   const deleteAnswer = async (answerId: string) => {
-    try {
-      const response = await deleteAnswerApi(answerId);
-      if (response) onDelete(answerId);
+    const response = await deleteAnswerApi(answerId);
+    if (response === true) {
+      onDelete(answerId);
       setShowError(false);
-    } catch (err) {
-      console.log(err);
+    } else {
+      console.log(response);
       setShowError(true);
     }
   };
@@ -79,13 +80,24 @@ const AnswerItem = ({
   };
 
   return (
-    <div className={styles.background}>
-      <div className={styles.main}>
-        <div className={styles.likesDislikes}>
-          <p>{likes} </p>
-          <FaThumbsUp onClick={likeAnswer} />
-          <p>{disLikes}</p>
-          <FaThumbsDown onClick={disLikeAnswer} />
+    <div className={styles.main}>
+      <div className={styles.likesDislikes}>
+        <p>{likes} </p>
+        <FaThumbsUp onClick={likeAnswer} />
+        <p>{disLikes}</p>
+        <FaThumbsDown onClick={disLikeAnswer} />
+      </div>
+
+      <div className={styles.itemInfo}>
+        <div className={styles.itemName}>
+          <p>Name:</p>
+          <h4>{userName}</h4>
+        </div>
+        <div className={styles.itemLine}>
+          <p>{answerText}</p>
+          <p className={styles.dateText}>
+            {format(new Date(date), "yyyy.MM.dd")}
+          </p>
         </div>
 
         {isShowError && (
@@ -93,34 +105,22 @@ const AnswerItem = ({
             Yuo can only delete question what belongs to You
           </h5>
         )}
-        <div className={styles.itemInfo}>
-          <div className={styles.itemName}>
-            <p>Name:</p>
-            <h4>{userName}</h4>
-          </div>
-          <div className={styles.itemLine}>
-            <p>{answerText}</p>
-            <p className={styles.dateText}>
-              {new Date(date).toLocaleDateString()}
-            </p>
-          </div>
 
-          <Button
-            title="Delete Answer"
-            onClick={confirmDelete}
-            isLoading={false}
-          />
-        </div>
-
-        {isModalOpen && (
-          <Modal
-            title={"Delete Answer?"}
-            subtitle={"Are you sure you want to delete this Answer?"}
-            onConfirm={deleteConfirmation}
-            onModalClose={() => setModalOpen(false)}
-          />
-        )}
+        <Button
+          title="Delete Answer"
+          onClick={confirmDelete}
+          isLoading={false}
+        />
       </div>
+
+      {isModalOpen && (
+        <Modal
+          title={"Are you sure you want to delete this Answer?"}
+          onConfirm={deleteConfirmation}
+          onModalClose={() => setModalOpen(false)}
+          style={{ marginLeft: "2rem", width: "80px" }}
+        />
+      )}
     </div>
   );
 };

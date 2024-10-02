@@ -19,6 +19,13 @@ const RegisterForm = () => {
       setShowError(true);
       return;
     }
+
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!regex.test(email)) {
+      setShowError(true);
+      return;
+    }
+
     try {
       setButtonLoading(true);
 
@@ -41,20 +48,26 @@ const RegisterForm = () => {
       <h1>Register</h1>
       <input
         onChange={(e) => {
-          setUserName(e.target.value);
+          setUserName(
+            (e.target.value =
+              e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1))
+          );
         }}
         value={userName}
         placeholder="Name"
         type="text"
       ></input>
+
       <input
         onChange={(e) => {
-          setEmail(e.target.value);
+          const email = e.target.value;
+          setEmail(email);
         }}
         value={email}
         placeholder="Email"
         type="text"
-      ></input>
+      />
+
       <input
         onChange={(e) => {
           setPasswor(e.target.value);

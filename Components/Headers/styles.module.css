@@ -1,7 +1,47 @@
-.header {
-  height: 100px;
+.headers {
+  height: 50px;
   background-color: var(--primary-color);
-  padding: 1rem 3rem;
   display: flex;
   align-items: center;
+  justify-content: space-around;
+}
+
+.headers ul {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+}
+.headers a {
+  text-decoration: none;
+  font-size: large;
+  color: white;
+}
+.headers ul li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6rem;
+}
+.headers button {
+  background-color: var(--secondary-color);
+  color: black;
+  width: 100px;
+}
+.headers a:hover {
+  color: black;
+}
+.headers button:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .headers button {
+    font-size: small;
+    width: 70px;
+    height: 25px;
+  }
+  .headers ul li {
+    gap: 1rem;
+  }
 }

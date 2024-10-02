@@ -3,18 +3,23 @@ import styles from "./styles.module.css";
 
 type ModalProps = {
   title: string;
-  subtitle: string;
+  style?: React.CSSProperties;
   onConfirm: () => void;
   onModalClose: () => void;
 };
 
-const Modal = ({ title, subtitle, onConfirm, onModalClose }: ModalProps) => {
+const Modal = ({ title, style, onConfirm, onModalClose }: ModalProps) => {
   return (
     <div className={styles.modal}>
-      <h2>{title}</h2>
-      <h3>{subtitle}</h3>
-      <button onClick={onConfirm}>Yes</button>
-      <button onClick={onModalClose}>No</button>
+      <h3>{title}</h3>
+      <div className={styles.button}>
+        <button className={styles.button} onClick={onConfirm} style={style}>
+          Yes
+        </button>
+        <button className={styles.button} onClick={onModalClose} style={style}>
+          No
+        </button>
+      </div>
     </div>
   );
 };
